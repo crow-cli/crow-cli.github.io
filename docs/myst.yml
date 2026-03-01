@@ -2,8 +2,8 @@ version: 1
 project:
   title: crow-cli
   description: Minimal Native ACP Agent Framework
-  github: https://github.com/crow-ai/crow-cli
-  license: MIT
+  github: https://github.com/crow-cli/crow-cli
+  license: Apache-2.0
 
 site:
   title: crow-cli Documentation

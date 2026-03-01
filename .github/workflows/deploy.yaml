@@ -36,6 +36,7 @@ jobs:
       - name: Build MyST docs
         run: |
           cd docs
+          export BASE_URL=https://crow-ai.dev
           myst build --html
 
       - name: Assemble site
