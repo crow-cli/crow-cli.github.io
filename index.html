@@ -36,6 +36,9 @@
                                 800: "#5b21b6",
                                 900: "#4c1d95",
                                 950: "#2600ab",
+                                1000: "#2bd445",
+                                1100: "#21dead",
+                                1200: "#3ec1b1",
                             },
                         },
                         fontFamily: {
@@ -55,6 +58,11 @@
             .font-display {
                 font-weight: 700;
                 font-style: italic;
+                letter-spacing: -0.02em;
+            }
+
+            .font-display-plain {
+                font-weight: 700;
                 letter-spacing: -0.02em;
             }
 
@@ -213,7 +221,7 @@
                 class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-4xl"
             >
                 <div
-                    class="absolute top-20 left-10 w-72 h-72 bg-crow-600/20 rounded-full blur-3xl"
+                    class="absolute top-20 left-10 w-72 h-72 bg-crow-400/20 rounded-full blur-3xl"
                 ></div>
                 <div
                     class="absolute bottom-20 right-10 w-96 h-96 bg-crow-800/20 rounded-full blur-3xl"
@@ -245,7 +253,7 @@
                 >
                     Minimal. Extensible. Native. A reference implementation of
                     the Agent Client Protocol with
-                    <span class="text-crow-300 font-semibold"
+                    <span class="text-crow-1200 font-semibold"
                         >zero frameworks</span
                     >—just pure Python, OpenAI SDK, FastMCP, and SQLAlchemy.
                 </p>
@@ -255,7 +263,7 @@
                 >
                     <button
                         onclick="copyToClipboard('uv tool install crow-cli --python 3.14')"
-                        class="group relative px-8 py-4 bg-crow-600 hover:bg-crow-500 text-white rounded-lg font-mono text-sm transition-all glow flex items-center space-x-3"
+                        class="group relative px-8 py-4 bg-crow-1200 hover:bg-crow-400 text-white rounded-lg font-mono text-sm transition-all glow flex items-center space-x-3"
                     >
                         <i data-lucide="terminal" class="w-4 h-4"></i>
                         <span>uv tool install crow-cli</span>
@@ -266,7 +274,7 @@
                     </button>
                     <a
                         href="/docs/"
-                        class="px-8 py-4 rounded-lg border border-crow-800 hover:border-crow-600 text-crow-300 hover:text-white transition-all text-sm font-medium"
+                        class="px-8 py-4 rounded-lg border border-crow-800 hover:border-crow-400 text-crow-300 hover:text-white transition-all text-sm font-medium"
                     >
                         Documentation →
                     </a>
@@ -283,7 +291,7 @@
         <section id="install" class="py-20 relative">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2
-                    class="font-display text-3xl md:text-4xl text-white mb-8 text-center"
+                    class="font-display-plain text-3xl md:text-4xl text-white mb-8 text-center"
                 >
                     Get Started in Seconds
                 </h2>
@@ -357,7 +365,7 @@
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2
-                        class="font-display text-3xl md:text-4xl text-white mb-4"
+                        class="font-display-plain text-3xl md:text-4xl text-white mb-4"
                     >
                         Built for Simplicity
                     </h2>
@@ -481,7 +489,7 @@
         <section id="architecture" class="py-20">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2
-                    class="font-display text-3xl md:text-4xl text-white mb-8 text-center"
+                    class="font-display-plain text-3xl md:text-4xl text-white mb-8 text-center"
                 >
                     Architecture Philosophy
                 </h2>
@@ -489,7 +497,7 @@
                 <div class="space-y-8">
                     <div class="relative pl-8 border-l-2 border-crow-800">
                         <div
-                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-crow-600 border-4 border-[#1c005f]"
+                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-crow-400 border-4 border-[#1c005f]"
                         ></div>
                         <h3 class="text-xl font-semibold text-white mb-2">
                             Zero Framework Dependencies
@@ -514,7 +522,7 @@
 
                     <div class="relative pl-8 border-l-2 border-crow-800">
                         <div
-                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-crow-600 border-4 border-[#1c005f]"
+                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-crow-400 border-4 border-[#1c005f]"
                         ></div>
                         <h3 class="text-xl font-semibold text-white mb-2">
                             Native ACP Implementation
@@ -527,7 +535,7 @@
 
                     <div class="relative pl-8 border-l-2 border-crow-800">
                         <div
-                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-crow-600 border-4 border-[#1c005f]"
+                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-crow-400 border-4 border-[#1c005f]"
                         ></div>
                         <h3 class="text-xl font-semibold text-white mb-2">
                             SearXNG Integration
@@ -554,7 +562,9 @@
                     >
                 </div>
 
-                <h2 class="font-display text-3xl md:text-4xl text-white mb-6">
+                <h2
+                    class="font-display-plain text-3xl md:text-4xl text-white mb-6"
+                >
                     The Ecosystem is Growing
                 </h2>
 
@@ -617,7 +627,7 @@
                             >crow-ai.dev</a
                         >
                         <a
-                            href="https://github.com/crow-ai/crow-cli"
+                            href="https://github.com/crow-cli/crow-cli"
                             target="_blank"
                             class="hover:text-crow-300 transition-colors"
                             >GitHub</a
@@ -646,7 +656,7 @@
                     // Create toast notification
                     const toast = document.createElement("div");
                     toast.className =
-                        "fixed bottom-8 left-1/2 -translate-x-1/2 bg-crow-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 text-sm font-medium animate-in fade-in slide-in-from-bottom-4 duration-300";
+                        "fixed bottom-8 left-1/2 -translate-x-1/2 bg-crow-400 text-white px-6 py-3 rounded-lg shadow-lg z-50 text-sm font-medium animate-in fade-in slide-in-from-bottom-4 duration-300";
                     toast.textContent = "Copied to clipboard!";
                     document.body.appendChild(toast);
 
