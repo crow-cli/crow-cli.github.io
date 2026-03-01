@@ -36,7 +36,7 @@ jobs:
       - name: Build MyST docs
         run: |
           cd docs
-          export BASE_URL=docs
+          export BASE_URL=/docs
           myst build --html
 
       - name: Assemble site
