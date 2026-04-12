@@ -262,7 +262,11 @@
                     class="flex flex-col sm:flex-row gap-4 justify-center items-center"
                 >
                     <button
-                        onclick="copyToClipboard('uv tool install crow-cli --python 3.14')"
+                        onclick="
+                            copyToClipboard(
+                                'uv tool install crow-cli --python 3.14',
+                            )
+                        "
                         class="group relative px-8 py-4 bg-crow-1200 hover:bg-crow-400 text-white rounded-lg font-mono text-sm transition-all glow flex items-center space-x-3"
                     >
                         <i data-lucide="terminal" class="w-4 h-4"></i>
@@ -305,7 +309,11 @@
                         >
                             <span>Installation</span>
                             <button
-                                onclick="copyToClipboard('uv tool install crow-cli --python 3.14')"
+                                onclick="
+                                    copyToClipboard(
+                                        'uv tool install crow-cli --python 3.14',
+                                    )
+                                "
                                 class="hover:text-crow-300 transition-colors flex items-center space-x-1"
                             >
                                 <i data-lucide="copy" class="w-3 h-3"></i>
@@ -332,7 +340,7 @@
                         >
                             <span>Initialize Project</span>
                             <button
-                                onclick="copyToClipboard('crow-cli init')"
+                                onclick="copyToClipboard('uvx crow-cli init')"
                                 class="hover:text-crow-300 transition-colors flex items-center space-x-1"
                             >
                                 <i data-lucide="copy" class="w-3 h-3"></i>
@@ -341,7 +349,8 @@
                         </div>
                         <code class="text-gray-300">
                             <span class="text-crow-400">$</span>
-                            <span class="text-blue-400">crow</span> init<br />
+                            <span class="text-green-400">uvx</span>
+                            crow-cli init<br />
                             <span class="text-gray-500"
                                 ># Creates project structure with:</span
                             ><br />
@@ -356,6 +365,36 @@
                             >
                         </code>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACP Registry Installation -->
+        <section
+            id="acp-registry"
+            class="py-20 bg-gradient-to-b from-crow-950/30 to-transparent"
+        >
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <h2
+                        class="font-display-plain text-3xl md:text-4xl text-white mb-4"
+                    >
+                        Install from Your Editor
+                    </h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">
+                        crow-cli is available on the ACP Registry. Install it
+                        directly from Zed, JetBrains, or any ACP-compatible
+                        client.
+                    </p>
+                </div>
+                <div
+                    class="rounded-xl overflow-hidden border border-crow-800/50 shadow-2xl"
+                >
+                    <img
+                        src="img/zed-agent-registry.png"
+                        alt="ACP Registry in Zed editor showing crow-cli and other agents"
+                        class="w-full h-auto"
+                    />
                 </div>
             </div>
         </section>
@@ -553,22 +592,13 @@
         <!-- Coming Soon -->
         <section class="py-20 bg-gradient-to-b from-crow-950/30 to-transparent">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <div
-                    class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-crow-800/30 border border-crow-700/50 mb-6"
-                >
-                    <i data-lucide="clock" class="w-4 h-4 text-crow-300"></i>
-                    <span class="text-sm font-medium text-crow-200"
-                        >Coming Soon</span
-                    >
-                </div>
-
                 <h2
                     class="font-display-plain text-3xl md:text-4xl text-white mb-6"
                 >
                     The Ecosystem is Growing
                 </h2>
 
-                <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                <div class="max-w-sm mx-auto">
                     <div
                         class="p-6 rounded-xl border border-crow-800/50 bg-crow-950/30"
                     >
@@ -583,22 +613,35 @@
                             Standardized agent specification tooling
                         </p>
                     </div>
-
-                    <div
-                        class="p-6 rounded-xl border border-crow-800/50 bg-crow-950/30"
-                    >
-                        <i
-                            data-lucide="globe"
-                            class="w-8 h-8 text-crow-400 mx-auto mb-3"
-                        ></i>
-                        <h3 class="text-white font-semibold mb-1">
-                            ACP Registry
-                        </h3>
-                        <p class="text-gray-400 text-sm">
-                            Discover and share agent configurations
-                        </p>
-                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- ACP Registry Section -->
+        <section class="py-20">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2
+                    class="font-display-plain text-3xl md:text-4xl text-white mb-4"
+                >
+                    ACP Registry
+                </h2>
+                <p class="text-gray-400 text-lg mb-8 max-w-xl mx-auto">
+                    crow-cli is listed on the official Agent Client Protocol
+                    Registry. Browse, compare, and install ACP-compatible
+                    agents.
+                </p>
+                <a
+                    href="https://agentclientprotocol.com/get-started/registry"
+                    target="_blank"
+                    class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-crow-400 hover:bg-crow-300 text-crow-950 font-semibold text-lg transition-all group"
+                >
+                    <i data-lucide="globe" class="w-5 h-5"></i>
+                    View on ACP Registry
+                    <i
+                        data-lucide="arrow-right"
+                        class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                    ></i>
+                </a>
             </div>
         </section>
 
