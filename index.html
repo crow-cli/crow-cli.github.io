@@ -19,15 +19,16 @@
 
 <nav class="top-nav" aria-label="Primary">
   <button class="menu-trigger" type="button" aria-expanded="false" aria-controls="site-menu-links" aria-label="Open menu">
-    <span class="menu-label">MENU</span>
+    <span class="menu-label">+</span>
     <span class="menu-chevron" aria-hidden="true">›</span>
   </button>
   <div class="menu-links" id="site-menu-links" hidden>
     <a class="nav-link" href="#what">Crow ADE</a>
-    <a class="nav-link" href="#cli">crow-cli</a>
+    <a class="nav-link" href="#cli"><code>crow-cli</code></a>
     <a class="nav-link" href="#install">Install</a>
     <a class="nav-link" href="#orchestration">Orchestration</a>
     <a class="nav-link" href="#observability">Observability</a>
+    <a class="nav-link" href="#about">About</a>
     <a class="nav-link" href="https://github.com/crow-cli" target="_blank" rel="noopener">GitHub</a>
   </div>
 </nav>
@@ -42,20 +43,23 @@
     <div class="kicker">What Is Crow</div>
     <h2>Crow ADE</h2>
     <p>
-      Crow is an Agent Development Environment built on top of <a href="https://github.com/crow-cli/crow-cli"><code>crow-cli</code></a> and <a href="https://github.com/Sidenai/sidex" target="_blank" rel="noopener">Sidex</a> made for concurrent agent orchestration.
+      Crow is an Agent Development Environment built on top of <a href="https://github.com/crow-cli/crow-cli" class="inline" target="_blank" rel="noopener"><code>crow-cli</code></a> and <a href="https://github.com/Sidenai/sidex" target="_blank" rel="noopener" class="inline">Sidex</a> made for concurrent agent orchestration.
     </p>
     <table class="neg-table">
       <tbody>
         <tr>
           <td class="neg-item">Transparent</td>
-          <td class="neg-why">Every agent works in the open. Tool calls, thinking, decisions are all rendered live in the editor.</td>
+          <td class="neg-why">Every agent works in the open. Tool calls, thinking, and decisions are all rendered live in the editor</td>
         </tr>
         <tr>
           <td class="neg-item">Cancellable</td>
           <td class="neg-why">Fine-grained supervision and control through cancellation.</td>
         </tr>
         <tr>
-          <td class="neg-item">VSCode ecosystem</td>
+          <td class="neg-item">Agent Client Protocol</td>
+          <td class="neg-why">ACP is LSP for agents, so we built an ACP client into a fork of VS Code.</td>
+        <tr>
+          <td class="neg-item">VS Code ecosystem</td>
           <td class="neg-why">Same editor, same terminal, same language servers.</td>
         </tr>
         <tr>
@@ -123,6 +127,34 @@
     <h2>UI is telemetry</h2>
     <p>
       Every action of the agent is rendered live in the chat panel. You watch the agent think, decide, and act, letting you course-correct in real time.
+    </p>
+  </section>
+
+  <section id="about" class="snap-section">
+    <div class="kicker">About</div>
+    <h2>Thomas Wood</h2>
+    <p>
+       I'm CTO at
+      <a class="inline" href="https://phytomech.com" target="_blank" rel="noopener">Phytomech</a>. 
+      I write about what I'm building at
+      <a class="inline" href="https://advanced-eschatonics.com" target="_blank" rel="noopener">advanced-eschatonics.com</a>.
+    </p>
+    <p>
+      Crow and crow-cli are free and open source. I built them because I got rug
+      pulled by multiple agent subscriptions in the span of a year. This is what
+      I use now. Bring your own keys, bring your own models, own the infrastructure.
+    </p>
+    <p>
+      Huge thanks to
+      <a class="inline" href="https://zed.dev" target="_blank" rel="noopener">Zed</a>
+      and
+      <a class="inline" href="https://jetbrains.com" target="_blank" rel="noopener">JetBrains</a>
+      for
+      <a class="inline" href="https://agentclientprotocol.com" target="_blank" rel="noopener">ACP</a>,
+      <a class="inline" href="https://github.com/Sidenai" target="_blank" rel="noopener">SidenAI</a>
+      for Sidex, and
+      <a class="inline" href="https://github.com/All-Hands-AI/OpenHands" target="_blank" rel="noopener">OpenHands</a>
+      for the system prompt that got me started.
     </p>
   </section>
 

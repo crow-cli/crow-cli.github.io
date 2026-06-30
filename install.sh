@@ -56,7 +56,7 @@ header "Step 2/3: crow-cli"
 if uv tool list 2>/dev/null | grep -q '^crow-cli'; then
   ok "crow-cli already installed"
   info "Updating..."
-  uv tool upgrade crow-cli || ok "Already up to date"
+  uv tool install --reinstall crow-cli || ok "Already up to date"
 else
   info "Installing crow-cli..."
   uv tool install crow-cli --python 3.14
