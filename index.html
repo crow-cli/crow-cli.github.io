@@ -1,764 +1,136 @@
-<!doctype html>
-<html lang="en" class="scroll-smooth">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/x-icon" href="crow-icon-white.ico" />
-        <title>crow-cli - Minimal Native ACP Agent Framework</title>
-        <meta
-            name="description"
-            content="crow-cli: A minimal reference implementation of a native ACP agent. No frameworks, just OpenAI SDK, FastMCP, and SQLAlchemy."
-        />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crow ADE — multi-agent editor with shared memory and orchestration</title>
+<meta name="description" content="Crow ADE runs multiple AI agents in one native editor. Agents share a database, read each other's memory, and coordinate over ACP extension tools. Built on SideX.">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Crow ADE">
+<meta property="og:title" content="Crow ADE — Agent Development Environment">
+<meta property="og:description" content="Multiple agents. Shared memory. Client-side orchestration. One install line.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
 
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet"
-        />
+<canvas id="bg" aria-hidden="true"></canvas>
+<div id="bg-fallback" aria-hidden="true"></div>
 
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            crow: {
-                                DEFAULT: "#2600ab",
-                                50: "#f5f3ff",
-                                100: "#ede9fe",
-                                200: "#ddd6fe",
-                                300: "#c4b5fd",
-                                400: "#a78bfa",
-                                500: "#8b5cf6",
-                                600: "#7c3aed",
-                                700: "#6d28d9",
-                                800: "#5b21b6",
-                                900: "#4c1d95",
-                                950: "#2600ab",
-                                1000: "#2bd445",
-                                1100: "#21dead",
-                                1200: "#3ec1b1",
-                            },
-                        },
-                        fontFamily: {
-                            sans: ["Inter", "system-ui", "sans-serif"],
-                        },
-                    },
-                },
-            };
-        </script>
+<nav class="top-nav" aria-label="Primary">
+  <button class="menu-trigger" type="button" aria-expanded="false" aria-controls="site-menu-links" aria-label="Open menu">
+    <span class="menu-label">MENU</span>
+    <span class="menu-chevron" aria-hidden="true">›</span>
+  </button>
+  <div class="menu-links" id="site-menu-links" hidden>
+    <a class="nav-link" href="#what">Crow ADE</a>
+    <a class="nav-link" href="#cli">crow-cli</a>
+    <a class="nav-link" href="#install">Install</a>
+    <a class="nav-link" href="#orchestration">Orchestration</a>
+    <a class="nav-link" href="#observability">Observability</a>
+    <a class="nav-link" href="https://github.com/crow-cli" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</nav>
 
-        <style>
-            body {
-                font-family: "Inter", sans-serif;
-                background-color: #1c005f;
-            }
+<main id="main">
 
-            .font-display {
-                font-weight: 700;
-                font-style: italic;
-                letter-spacing: -0.02em;
-            }
+  <section class="hero-spacer" aria-label="Crow ADE">
+    <img class="main-logo" src="crow-logo.svg" alt="Crow ADE">
+  </section>
 
-            .font-display-plain {
-                font-weight: 700;
-                letter-spacing: -0.02em;
-            }
+  <section id="what" class="snap-section">
+    <div class="kicker">What Is Crow</div>
+    <h2>Crow ADE</h2>
+    <p>
+      Crow is an Agent Development Environment built on top of <a href="https://github.com/crow-cli/crow-cli"><code>crow-cli</code></a> and <a href="https://github.com/Sidenai/sidex" target="_blank" rel="noopener">Sidex</a> made for concurrent agent orchestration.
+    </p>
+    <table class="neg-table">
+      <tbody>
+        <tr>
+          <td class="neg-item">Transparent</td>
+          <td class="neg-why">Every agent works in the open. Tool calls, thinking, decisions are all rendered live in the editor.</td>
+        </tr>
+        <tr>
+          <td class="neg-item">Cancellable</td>
+          <td class="neg-why">Fine-grained supervision and control through cancellation.</td>
+        </tr>
+        <tr>
+          <td class="neg-item">VSCode ecosystem</td>
+          <td class="neg-why">Same editor, same terminal, same language servers.</td>
+        </tr>
+        <tr>
+          <td class="neg-item">Orchestration</td>
+          <td class="neg-why">Conditional loop engineering. Agents manage their own task loops, delegate to other agents, and control exit conditions — theirs and others'.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
-            .gradient-text {
-                background: linear-gradient(
-                    135deg,
-                    #1c005f 0%,
-                    #8a6cf7 50%,
-                    #b29dff 100%
-                );
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-            }
 
-            .glow {
-                box-shadow:
-                    0 0 20px rgba(28, 0, 95, 0.3),
-                    0 0 40px rgba(138, 108, 247, 0.1);
-            }
+    <section id="cli" class="snap-section">
+    <div class="kicker">crow-cli</div>
+    <h2><code>crow-cli</code></h2>
+    <p>
+      <code>crow-cli</code> is a stateful ACP-native coding agent. 
+    </p>
+    <h3>What we didn't build</h3>
+    <table class="neg-table">
+      <tbody>
+        <tr>
+          <td class="neg-item">Permissions</td>
+          <td class="neg-why">The agent has the same access you do. You trust it or you don't run it.</td>
+        </tr>
+        <tr>
+          <td class="neg-item">New protocol</td>
+          <td class="neg-why">We use ACP. No new data model for agent-client interaction.</td>
+        </tr>
+        <tr>
+          <td class="neg-item">Offline agent</td>
+          <td class="neg-why">Every agent has <code>web_search</code> and <code>web_fetch</code> and is prompted to use them liberally.</td>
+        </tr>
+        <tr>
+          <td class="neg-item">Agent skills</td>
+          <td class="neg-why">Agents are never offline and are encouraged to take whatever they need from the internet. Once a task is accomplished, it's a few memory tool calls away from being reinjected into any session context. No static skill packages.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
-            .code-block {
-                background: linear-gradient(180deg, #2a0080 0%, #1c005f 100%);
-                border: 1px solid rgba(138, 108, 247, 0.2);
-            }
+  <section id="install" class="snap-section">
+    <div class="kicker">Install</div>
+    <h2>Install <code>crow-cli</code> and Crow ADE</h2>
+    <div class="install" role="group" aria-label="Install Crow ADE">
+      <code><span class="prompt">$</span> curl -fsSL crow-ai.dev/install.sh | bash</code>
+      <button class="copy" type="button" data-copy="curl -fsSL crow-ai.dev/install.sh | bash" aria-label="Copy install command">Copy</button>
+    </div>
 
-            .feature-card {
-                background: rgba(28, 0, 95, 0.05);
-                border: 1px solid rgba(138, 108, 247, 0.1);
-                transition: all 0.3s ease;
-            }
+    <p class="install-sub">
+      Copy and paste into a terminal to install our ACP agent and client.
+    </p>
+  </section>
 
-            .feature-card:hover {
-                background: rgba(28, 0, 95, 0.1);
-                border-color: rgba(138, 108, 247, 0.3);
-                transform: translateY(-2px);
-            }
+  <section id="orchestration" class="snap-section">
+    <div class="kicker">Orchestration</div>
+    <h2>Loop Engineering</h2>
+    <p>
+      Crow's orchestration tools allow agents to manage their own loops as well as to create task lists for other agents — delegating work to the future so our <code>crow-cli</code> agents can operate indefinitely.
+    </p>
+    <div id="task-loop-viz"></div>
+  </section>
 
-            .grid-bg {
-                background-image: radial-gradient(
-                    circle at 1px 1px,
-                    rgba(167, 139, 250, 0.15) 1px,
-                    transparent 0
-                );
-                background-size: 40px 40px;
-            }
+  <section id="observability" class="snap-section">
+    <div class="kicker">Observability</div>
+    <h2>UI is telemetry</h2>
+    <p>
+      Every action of the agent is rendered live in the chat panel. You watch the agent think, decide, and act, letting you course-correct in real time.
+    </p>
+  </section>
 
-            /* Scroll animations */
-            .fade-in-section {
-                opacity: 0;
-                transform: translateY(30px);
-                transition:
-                    opacity 0.8s ease-out,
-                    transform 0.8s ease-out;
-                will-change: opacity, transform;
-            }
+</main>
 
-            .fade-in-section.is-visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
 
-            /* Stagger delay for child elements */
-            .fade-in-section .stagger-child:nth-child(1) {
-                transition-delay: 0.1s;
-            }
-            .fade-in-section .stagger-child:nth-child(2) {
-                transition-delay: 0.2s;
-            }
-            .fade-in-section .stagger-child:nth-child(3) {
-                transition-delay: 0.3s;
-            }
-            .fade-in-section .stagger-child:nth-child(4) {
-                transition-delay: 0.4s;
-            }
-            .fade-in-section .stagger-child:nth-child(5) {
-                transition-delay: 0.5s;
-            }
-            .fade-in-section .stagger-child:nth-child(6) {
-                transition-delay: 0.6s;
-            }
 
-            /* Sticky scroll progress bar */
-            .scroll-progress {
-                position: fixed;
-                top: 0;
-                left: 0;
-                height: 3px;
-                background: linear-gradient(90deg, #2600ab, #8b5cf6);
-                z-index: 1000;
-                transition: width 0.1s ease-out;
-            }
-
-            /* Parallax effect for hero */
-            .parallax-bg {
-                background-attachment: fixed;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
-        </style>
-    </head>
-    <body class="text-gray-300 antialiased overflow-x-hidden">
-        <!-- Scroll Progress Bar -->
-        <div class="scroll-progress" id="scrollProgress"></div>
-        <!-- Navigation -->
-        <nav
-            class="fixed top-0 w-full z-50 bg-[#1c005f]/80 backdrop-blur-md border-b border-crow-900/30"
-        >
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center h-16">
-                    <div class="flex items-center space-x-2">
-                        <span class="font-display text-xl text-white"
-                            >crow</span
-                        >
-                        <img src="crow-logo.svg" class="w-6 h-6" alt="crow" />
-                    </div>
-                    <div class="hidden md:flex space-x-8">
-                        <a
-                            href="#install"
-                            class="text-sm font-medium hover:text-crow-300 transition-colors"
-                            >Install</a
-                        >
-                        <a
-                            href="#features"
-                            class="text-sm font-medium hover:text-crow-300 transition-colors"
-                            >Features</a
-                        >
-                        <a
-                            href="#architecture"
-                            class="text-sm font-medium hover:text-crow-300 transition-colors"
-                            >Architecture</a
-                        >
-                        <a
-                            href="/docs/"
-                            class="text-sm font-medium hover:text-crow-300 transition-colors"
-                            >Docs</a
-                        >
-                    </div>
-                    <a
-                        href="https://github.com/crow-cli/crow-cli"
-                        target="_blank"
-                        class="flex items-center space-x-2 text-sm font-medium text-crow-300 hover:text-crow-200 transition-colors"
-                    >
-                        <i data-lucide="github" class="w-4 h-4"></i>
-                        <span>GitHub</span>
-                    </a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Hero Section -->
-        <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
-            <div class="absolute inset-0 grid-bg opacity-50"></div>
-            <div
-                class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-4xl"
-            >
-                <div
-                    class="absolute top-20 left-10 w-72 h-72 bg-crow-400/20 rounded-full blur-3xl"
-                ></div>
-                <div
-                    class="absolute bottom-20 right-10 w-96 h-96 bg-crow-800/20 rounded-full blur-3xl"
-                ></div>
-            </div>
-
-            <div
-                class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-            >
-                <div
-                    class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-crow-950/50 border border-crow-800/50 mb-8"
-                >
-                    <span
-                        class="flex h-2 w-2 rounded-full bg-crow-400 animate-pulse"
-                    ></span>
-                    <span class="text-sm font-medium text-crow-200"
-                        >Native ACP Agent Reference Implementation</span
-                    >
-                </div>
-
-                <h1
-                    class="font-display text-5xl md:text-7xl lg:text-8xl text-white mb-6 tracking-tight"
-                >
-                    crow-cli
-                </h1>
-
-                <p
-                    class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed"
-                >
-                    Minimal. Extensible. Native. A reference implementation of
-                    the Agent Client Protocol with
-                    <span class="text-crow-1200 font-semibold"
-                        >zero frameworks</span
-                    >—just pure Python, OpenAI SDK, FastMCP, and SQLAlchemy.
-                </p>
-
-                <div
-                    class="flex flex-col sm:flex-row gap-4 justify-center items-center"
-                >
-                    <button
-                        onclick="
-                            copyToClipboard(
-                                'uv tool install crow-cli --python 3.14',
-                            )
-                        "
-                        class="group relative px-8 py-4 bg-crow-1200 hover:bg-crow-400 text-white rounded-lg font-mono text-sm transition-all glow flex items-center space-x-3"
-                    >
-                        <i data-lucide="terminal" class="w-4 h-4"></i>
-                        <span>uv tool install crow-cli</span>
-                        <i
-                            data-lucide="copy"
-                            class="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity"
-                        ></i>
-                    </button>
-                    <a
-                        href="/docs/"
-                        class="px-8 py-4 rounded-lg border border-crow-800 hover:border-crow-400 text-crow-300 hover:text-white transition-all text-sm font-medium"
-                    >
-                        Documentation →
-                    </a>
-                </div>
-
-                <div class="mt-4 text-xs text-gray-500 font-mono">
-                    Or run directly with
-                    <span class="text-crow-400">uvx crow-cli</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Install Section -->
-        <section id="install" class="py-20 relative">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2
-                    class="font-display-plain text-3xl md:text-4xl text-white mb-8 text-center"
-                >
-                    Get Started in Seconds
-                </h2>
-
-                <div class="space-y-6">
-                    <div
-                        class="code-block rounded-xl p-6 font-mono text-sm overflow-x-auto"
-                    >
-                        <div
-                            class="flex items-center justify-between mb-4 text-gray-500 text-xs uppercase tracking-wider"
-                        >
-                            <span>Installation</span>
-                            <button
-                                onclick="
-                                    copyToClipboard(
-                                        'uv tool install crow-cli --python 3.14',
-                                    )
-                                "
-                                class="hover:text-crow-300 transition-colors flex items-center space-x-1"
-                            >
-                                <i data-lucide="copy" class="w-3 h-3"></i>
-                                <span>Copy</span>
-                            </button>
-                        </div>
-                        <code class="text-gray-300">
-                            <span class="text-crow-400">$</span>
-                            <span class="text-green-400">uv</span> tool install
-                            crow-cli --python 3.14<br />
-                            <span class="text-gray-500"
-                                ># Or run without installing:</span
-                            ><br />
-                            <span class="text-crow-400">$</span>
-                            <span class="text-green-400">uvx</span> crow-cli
-                        </code>
-                    </div>
-
-                    <div
-                        class="code-block rounded-xl p-6 font-mono text-sm overflow-x-auto"
-                    >
-                        <div
-                            class="flex items-center justify-between mb-4 text-gray-500 text-xs uppercase tracking-wider"
-                        >
-                            <span>Initialize Project</span>
-                            <button
-                                onclick="copyToClipboard('uvx crow-cli init')"
-                                class="hover:text-crow-300 transition-colors flex items-center space-x-1"
-                            >
-                                <i data-lucide="copy" class="w-3 h-3"></i>
-                                <span>Copy</span>
-                            </button>
-                        </div>
-                        <code class="text-gray-300">
-                            <span class="text-crow-400">$</span>
-                            <span class="text-green-400">uvx</span>
-                            crow-cli init<br />
-                            <span class="text-gray-500"
-                                ># Creates project structure with:</span
-                            ><br />
-                            <span class="text-gray-500"
-                                ># - Docker Compose with SearXNG</span
-                            ><br />
-                            <span class="text-gray-500"
-                                ># - Agent configuration</span
-                            ><br />
-                            <span class="text-gray-500"
-                                ># - Minimal boilerplate</span
-                            >
-                        </code>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ACP Registry Installation -->
-        <section
-            id="acp-registry"
-            class="py-20 bg-gradient-to-b from-crow-950/30 to-transparent"
-        >
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-10">
-                    <h2
-                        class="font-display-plain text-3xl md:text-4xl text-white mb-4"
-                    >
-                        Install from Your Editor
-                    </h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto">
-                        crow-cli is available on the ACP Registry. Install it
-                        directly from Zed, JetBrains, or any ACP-compatible
-                        client.
-                    </p>
-                </div>
-                <div
-                    class="rounded-xl overflow-hidden border border-crow-800/50 shadow-2xl"
-                >
-                    <img
-                        src="https://raw.githubusercontent.com/crow-cli/crow-cli.github.io/refs/heads/main/img/zed-agent-registry.png"
-                        alt="ACP Registry in Zed editor showing crow-cli and other agents"
-                        class="w-full h-auto"
-                    />
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Grid -->
-        <section id="features" class="py-20 bg-crow-950/20">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2
-                        class="font-display-plain text-3xl md:text-4xl text-white mb-4"
-                    >
-                        Built for Simplicity
-                    </h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto">
-                        No bloat. No unnecessary abstractions. Just the
-                        essentials for building native ACP agents.
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="feature-card rounded-xl p-6 stagger-child">
-                        <div
-                            class="w-12 h-12 rounded-lg bg-crow-900/50 flex items-center justify-center mb-4"
-                        >
-                            <i
-                                data-lucide="search"
-                                class="w-6 h-6 text-crow-400"
-                            ></i>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">
-                            SearXNG Included
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Built-in web browser capabilities via Docker
-                            Compose. No API keys required for search.
-                        </p>
-                    </div>
-
-                    <div class="feature-card rounded-xl p-6 stagger-child">
-                        <div
-                            class="w-12 h-12 rounded-lg bg-crow-900/50 flex items-center justify-center mb-4"
-                        >
-                            <i
-                                data-lucide="zap"
-                                class="w-6 h-6 text-crow-400"
-                            ></i>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">FastMCP</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            All tools are build on top of FastMCP because you
-                            don't need a tool calling framework in 2026.
-                        </p>
-                    </div>
-
-                    <div class="feature-card rounded-xl p-6 stagger-child">
-                        <div
-                            class="w-12 h-12 rounded-lg bg-crow-900/50 flex items-center justify-center mb-4"
-                        >
-                            <i
-                                data-lucide="brain"
-                                class="w-6 h-6 text-crow-400"
-                            ></i>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">
-                            OpenAI SDK
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Direct integration with OpenAI's Python SDK. No
-                            wrapper frameworks between you and the API.
-                        </p>
-                    </div>
-
-                    <div class="feature-card rounded-xl p-6 stagger-child">
-                        <div
-                            class="w-12 h-12 rounded-lg bg-crow-900/50 flex items-center justify-center mb-4"
-                        >
-                            <i
-                                data-lucide="database"
-                                class="w-6 h-6 text-crow-400"
-                            ></i>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">
-                            SQLAlchemy
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Robust database management with SQLAlchemy ORM.
-                            Store agent state, memory, and logs efficiently.
-                        </p>
-                    </div>
-
-                    <div class="feature-card rounded-xl p-6 stagger-child">
-                        <div
-                            class="w-12 h-12 rounded-lg bg-crow-900/50 flex items-center justify-center mb-4"
-                        >
-                            <i
-                                data-lucide="container"
-                                class="w-6 h-6 text-crow-400"
-                            ></i>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">
-                            Docker Ready
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Production-ready Docker Compose setup out of the
-                            box. Isolate your agent environment completely.
-                        </p>
-                    </div>
-
-                    <div class="feature-card rounded-xl p-6 stagger-child">
-                        <div
-                            class="w-12 h-12 rounded-lg bg-crow-900/50 flex items-center justify-center mb-4"
-                        >
-                            <i
-                                data-lucide="puzzle"
-                                class="w-6 h-6 text-crow-400"
-                            ></i>
-                        </div>
-                        <h3 class="text-white font-semibold mb-2">
-                            Extensible Design
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Minimal core, maximum flexibility. Reference
-                            architecture that's easy to extend and customize.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Architecture Deep Dive -->
-        <section id="architecture" class="py-20">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2
-                    class="font-display-plain text-3xl md:text-4xl text-white mb-8 text-center"
-                >
-                    Architecture Philosophy
-                </h2>
-
-                <div class="space-y-8">
-                    <div class="relative pl-8 border-l-2 border-crow-800">
-                        <div
-                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-crow-400 border-4 border-[#1c005f]"
-                        ></div>
-                        <h3 class="text-xl font-semibold text-white mb-2">
-                            Zero Framework Dependencies
-                        </h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            We believe in transparency. crow-cli uses only
-                            <code class="text-crow-300 bg-crow-950 px-1 rounded"
-                                >openai</code
-                            >,
-                            <code class="text-crow-300 bg-crow-950 px-1 rounded"
-                                >acp</code
-                            >,
-                            <code class="text-crow-300 bg-crow-950 px-1 rounded"
-                                >fastmcp</code
-                            >, and
-                            <code class="text-crow-300 bg-crow-950 px-1 rounded"
-                                >sqlalchemy</code
-                            >. No black-box frameworks hiding the implementation
-                            details.
-                        </p>
-                    </div>
-
-                    <div class="relative pl-8 border-l-2 border-crow-800">
-                        <div
-                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-crow-400 border-4 border-[#1c005f]"
-                        ></div>
-                        <h3 class="text-xl font-semibold text-white mb-2">
-                            Native ACP Implementation
-                        </h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            Full compliance with the Agent Client Protocol
-                            specification. Works with any ACP-compatible client.
-                        </p>
-                    </div>
-
-                    <div class="relative pl-8 border-l-2 border-crow-800">
-                        <div
-                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-crow-400 border-4 border-[#1c005f]"
-                        ></div>
-                        <h3 class="text-xl font-semibold text-white mb-2">
-                            SearXNG Integration
-                        </h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            Unlimited search via self-hosted SearXNG instance in
-                            Docker. API search keys? We don't need no stinking
-                            API search keys.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Coming Soon -->
-        <section class="py-20 bg-gradient-to-b from-crow-950/30 to-transparent">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2
-                    class="font-display-plain text-3xl md:text-4xl text-white mb-6"
-                >
-                    The Ecosystem is Growing
-                </h2>
-
-                <div class="max-w-sm mx-auto">
-                    <div
-                        class="p-6 rounded-xl border border-crow-800/50 bg-crow-950/30"
-                    >
-                        <i
-                            data-lucide="package"
-                            class="w-8 h-8 text-crow-400 mx-auto mb-3"
-                        ></i>
-                        <h3 class="text-white font-semibold mb-1">
-                            Spec Kit Integration
-                        </h3>
-                        <p class="text-gray-400 text-sm">
-                            Standardized agent specification tooling
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ACP Registry Section -->
-        <section class="py-20">
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2
-                    class="font-display-plain text-3xl md:text-4xl text-white mb-4"
-                >
-                    ACP Registry
-                </h2>
-                <p class="text-gray-400 text-lg mb-8 max-w-xl mx-auto">
-                    crow-cli is listed on the official Agent Client Protocol
-                    Registry. Browse, compare, and install ACP-compatible
-                    agents.
-                </p>
-                <a
-                    href="https://agentclientprotocol.com/get-started/registry"
-                    target="_blank"
-                    class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-crow-400 hover:bg-crow-300 text-crow-950 font-semibold text-lg transition-all group"
-                >
-                    <i data-lucide="globe" class="w-5 h-5"></i>
-                    View on ACP Registry
-                    <i
-                        data-lucide="arrow-right"
-                        class="w-5 h-5 group-hover:translate-x-1 transition-transform"
-                    ></i>
-                </a>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="border-t border-crow-900/30 py-12 mt-20">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div
-                    class="flex flex-col md:flex-row justify-between items-center"
-                >
-                    <div class="flex items-center space-x-2 mb-4 md:mb-0">
-                        <span class="font-display text-lg text-white"
-                            >crow</span
-                        >
-                        <img
-                            src="crow-icon-white.svg"
-                            class="w-5 h-5"
-                            alt="crow"
-                        />
-                    </div>
-
-                    <div class="flex space-x-6 text-sm text-gray-400">
-                        <a
-                            href="https://crow-ai.dev"
-                            target="_blank"
-                            class="hover:text-crow-300 transition-colors"
-                            >crow-ai.dev</a
-                        >
-                        <a
-                            href="https://github.com/crow-cli/crow-cli"
-                            target="_blank"
-                            class="hover:text-crow-300 transition-colors"
-                            >GitHub</a
-                        >
-                        <a
-                            href="https://docs.crow-ai.dev"
-                            target="_blank"
-                            class="hover:text-crow-300 transition-colors"
-                            >Documentation</a
-                        >
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-        <script src="https://unpkg.com/lucide@latest"></script>
-        <script>
-            lucide.createIcons();
-
-            function copyToClipboard(text) {
-                navigator.clipboard.writeText(text).then(() => {
-                    // Create toast notification
-                    const toast = document.createElement("div");
-                    toast.className =
-                        "fixed bottom-8 left-1/2 -translate-x-1/2 bg-crow-400 text-white px-6 py-3 rounded-lg shadow-lg z-50 text-sm font-medium animate-in fade-in slide-in-from-bottom-4 duration-300";
-                    toast.textContent = "Copied to clipboard!";
-                    document.body.appendChild(toast);
-
-                    setTimeout(() => {
-                        toast.classList.add(
-                            "animate-out",
-                            "fade-out",
-                            "slide-out-to-bottom-4",
-                        );
-                        setTimeout(() => toast.remove(), 300);
-                    }, 2000);
-                });
-            }
-
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-                anchor.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(
-                        this.getAttribute("href"),
-                    );
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start",
-                        });
-                    }
-                });
-            });
-
-            // Scroll progress bar
-            window.addEventListener("scroll", () => {
-                const winScroll =
-                    document.body.scrollTop ||
-                    document.documentElement.scrollTop;
-                const height =
-                    document.documentElement.scrollHeight -
-                    document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                document.getElementById("scrollProgress").style.width =
-                    scrolled + "%";
-            });
-
-            // Intersection Observer for fade-in animations
-            const observerOptions = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.1,
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("is-visible");
-                    }
-                });
-            }, observerOptions);
-
-            // Observe all sections for fade-in
-            document.querySelectorAll("section").forEach((section) => {
-                section.classList.add("fade-in-section");
-                observer.observe(section);
-            });
-        </script>
-    </body>
+<script src="main.js" defer></script>
+<script src="task-loop-viz.js" defer></script>
+</body>
 </html>

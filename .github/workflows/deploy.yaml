@@ -42,8 +42,12 @@ jobs:
       - name: Assemble site
         run: |
           mkdir -p _site
-          # Landing page from site/
+          # Landing page and assets
           cp index.html _site/
+          cp style.css _site/
+          cp main.js _site/
+          cp task-loop-viz.js _site/
+          cp install.sh _site/
           cp icon.ico _site/
           cp crow-icon-white.ico _site/
           cp crow-icon-white.svg _site/
