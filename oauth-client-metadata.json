@@ -1,0 +1,22 @@
+{
+  "client_id": "https://crow-ai.dev/oauth-client-metadata.json",
+  "client_name": "Crow",
+  "client_uri": "https://crow-ai.dev",
+  "logo_uri": "https://crow-ai.dev/crow-logo.svg",
+  "tos_uri": "https://crow-ai.dev",
+  "policy_uri": "https://crow-ai.dev",
+  "redirect_uris": [
+    "http://127.0.0.1/callback"
+  ],
+  "scope": "atproto transition:generic",
+  "grant_types": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "response_types": [
+    "code"
+  ],
+  "token_endpoint_auth_method": "none",
+  "application_type": "native",
+  "dpop_bound_access_tokens": true
+}
