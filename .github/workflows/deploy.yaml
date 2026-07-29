@@ -52,6 +52,7 @@ jobs:
           cp crow-icon-white.ico _site/
           cp crow-icon-white.svg _site/
           cp crow-logo.svg _site/
+          cp oauth-client-metadata.json _site/
           # MyST docs at /docs
           cp -r docs/_build/html _site/docs
 
