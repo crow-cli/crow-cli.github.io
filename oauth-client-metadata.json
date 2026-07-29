@@ -6,7 +6,7 @@
   "tos_uri": "https://crow-ai.dev",
   "policy_uri": "https://crow-ai.dev",
   "redirect_uris": [
-    "http://127.0.0.1/callback"
+    "http://127.0.0.1:19836/callback"
   ],
   "scope": "atproto transition:generic",
   "grant_types": [
