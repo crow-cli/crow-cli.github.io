@@ -59,3 +59,35 @@ User mandate (verbatim):
 
 - `crow-cli skills sync` / init-clones-monorepo code: deferred in favor of the prompt-based
   llms.txt bootstrap (user's stated lean). Docs describe the clone step manually.
+
+## Follow-up 2026-08-11 — post-ship user feedback (landing rhetoric)
+
+User mandate (verbatim gist): we totally built skills — excise the "didn't build skills"
+rhetoric, point to the online skills, "open a PR to add to them today". And the Client
+section must not be named Zed: call it Client, link agentclientprotocol.com's clients page,
+offer our zed fork as preferred client, stress NO affiliation with Zed — it is just one of
+many ACP clients on the market.
+
+- [ ] `#cli` section: delete the "Agent skills" row from the "What we didn't build" table;
+  add a positive Skills block → catalog at /docs/skills/, machine-readable /llms.txt,
+  "Open a PR to add to them today" linking crow-cli/crow-cli.github.io.
+  Verify: `rg -n "Agent skills|didn't build" index.html` — only 3 legit neg rows remain.
+- [ ] `#what` section: h2 "Crow ADE" → "Client"; nav label "Crow ADE" → "Client". Copy:
+  crow-cli speaks ACP (LSP for agents) and runs in ANY ACP client (link
+  https://agentclientprotocol.com/get-started/clients); preferred client = our Zed fork
+  (https://github.com/odellus/zed, /docs/zed/ setup guide); explicit no-affiliation-with-
+  Zed-Industries disclaimer. Drop the stale Sidex/VS-Code-fork table rows (keep
+  Transparent / Cancellable / Orchestration).
+  Verify: `rg -in "zed|sidex|vs code" index.html` shows only intended mentions; hrefs 200.
+- [ ] Commit + push (Session-Id trailer); deploy workflow green; live landing shows new copy.
+
+
+BUG REPORT:
+
+got a 
+```
+Internal error: {
+  "error": "memory error 413: Failed to buffer the request body: length limit exceeded"
+}
+```
+from the agent after calling read_image_file.

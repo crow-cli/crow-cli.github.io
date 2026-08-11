@@ -78,3 +78,17 @@ Trajectory: 1 → 2 → 3 → 4, in order.
   ~/.agents/crow/prompts/system_prompt.jinja2, 2 new unit tests (138 total pass);
   3.3 llms.txt Docs section generated from site-src tree.
 - 4.x commits + push + live verification follow below.
+
+## Phase 5 — landing rhetoric fix (2026-08-11, post-ship user feedback)
+
+5.1 index.html `#cli`: remove "Agent skills" neg-table row; add positive Skills paragraph
+    (catalog /docs/skills/, /llms.txt, open-a-PR pointer → crow-cli/crow-cli.github.io).
+5.2 index.html `#what`: rename to "Client" (h2 + nav label); rewrite intro — ACP = LSP for
+    agents, any ACP client works (link get-started/clients registry), preferred = our Zed
+    fork odellus/zed + /docs/zed/, explicit no-affiliation disclaimer; drop Sidex/VS-Code
+    rows, keep Transparent/Cancellable/Orchestration.
+5.3 Verify: rg checks (no skills-under-didn't-build, no unintended zed/sidex/vscode refs);
+    curl -o /dev/null -w "%{http_code}" every new href (clients page, odellus/zed, /docs/zed/,
+    /docs/skills/, /llms.txt, crow-cli.github.io repo).
+5.4 Commit (Session-Id trailer) + push; poll deploy workflow; curl live landing and grep for
+    the new copy ("no affiliation", "Open a PR").
