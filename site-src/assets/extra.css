@@ -1,0 +1,41 @@
+/* crow-ai.dev brand — matches the landing page palette */
+:root > * {
+  --md-primary-fg-color:        #8b5cf6;
+  --md-primary-fg-color--light: #a78bfa;
+  --md-primary-fg-color--dark:  #6d28d9;
+  --md-accent-fg-color:         #a78bfa;
+  --md-default-bg-color:        #07060b;
+  --md-default-bg-color--light: #0c0b13;
+  --md-default-fg-color:        #e8e6f0;
+  --md-default-fg-color--light: #c9c6d8;
+  --md-default-fg-color--lighter: #8a8798;
+  --md-default-fg-color--lightest: #5c5968;
+  --md-code-bg-color:           #0c0b13;
+  --md-code-fg-color:           #e8e6f0;
+  --md-typeset-a-color:         #a78bfa;
+}
+
+.md-header,
+.md-tabs {
+  background-color: #0c0b13;
+  border-bottom: 1px solid #1b1826;
+}
+
+.md-footer {
+  background-color: #0c0b13;
+}
+
+.md-nav__link--active,
+.md-nav__link:active {
+  color: #a78bfa;
+}
+
+.md-typeset h1,
+.md-typeset h2 {
+  color: #e8e6f0;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  background-color: #0c0b13;
+}

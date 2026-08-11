@@ -1,2 +1,5 @@
 docs/_build
 _site
+site-build/
+site/.venv/
+.playwright-mcp/

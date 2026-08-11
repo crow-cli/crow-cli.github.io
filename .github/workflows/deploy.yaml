@@ -25,19 +25,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v4
 
-      - name: Install MyST
-        run: npm install -g mystmd
-
-      - name: Build MyST docs
-        run: |
-          cd docs
-          export BASE_URL=/docs
-          myst build --html
+      - name: Build mkdocs site
+        run: uv --project site run mkdocs build
 
       - name: Assemble site
         run: |
@@ -53,8 +45,12 @@ jobs:
           cp crow-icon-white.svg _site/
           cp crow-logo.svg _site/
           cp oauth-client-metadata.json _site/
-          # MyST docs at /docs
-          cp -r docs/_build/html _site/docs
+          # mkdocs docs (human-readable, includes rendered skills) at /docs
+          cp -r site-build _site/docs
+          # raw fetchable skill files at /skills (SKILL.md, pyproject.toml, ...)
+          cp -r site-src/skills _site/skills
+          # llms.txt index
+          cp llms.txt _site/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

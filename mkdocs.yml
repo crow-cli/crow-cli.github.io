@@ -1,0 +1,68 @@
+site_name: crow-cli
+site_url: https://crow-ai.dev/docs/
+site_description: crow-cli — stateful ACP-native coding agent. Docs and agent skills.
+repo_url: https://github.com/crow-cli/crow-cli
+edit_uri: ""
+
+docs_dir: site-src
+site_dir: site-build
+
+theme:
+  name: material
+  logo: assets/crow-icon-white.svg
+  favicon: assets/crow-icon-white.ico
+  font:
+    text: Inter
+    code: JetBrains Mono
+  palette:
+    scheme: slate
+    primary: custom
+    accent: custom
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.highlight
+    - content.code.copy
+
+extra_css:
+  - assets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: installation.md
+      - Configuration: configuration.md
+      - Zed: zed.md
+  - Guides:
+      - The CLI: cli.md
+      - Services: services.md
+  # -- skills-nav: generated below by sync-skills.py, do not hand-edit --
+  - Skills:
+      - Catalog: skills/index.md
+      - acp-v2: skills/acp-v2/SKILL.md
+      - learn: skills/learn/SKILL.md
+      - openai-streaming-tools: skills/openai-streaming-tools/SKILL.md
+      - plan-todo: skills/plan-todo/SKILL.md
+      - searxng: skills/searxng/SKILL.md
+      - sg: skills/sg/SKILL.md
+      - skill-creation: skills/skill-creation/SKILL.md
+      - upstream-merge: skills/upstream-merge/SKILL.md
+      - use-uv: skills/use-uv/SKILL.md

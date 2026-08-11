@@ -1,0 +1,18 @@
+[project]
+name = "use-uv"
+version = "0.1.0"
+description = "Ready-to-run Python sandbox for Crow agents. Invoke via `uv --project ~/.agents/skills/use-uv run python ...`."
+requires-python = ">=3.11"
+dependencies = [
+    "pyyaml",
+    "httpx",
+    "rich",
+    "gguf>=0.19.0",
+    "numpy>=2.4.6",
+    "scipy>=1.17.1",
+    "lancedb",
+]
+
+[tool.uv]
+# This is a dependency environment, not an installable package.
+package = false

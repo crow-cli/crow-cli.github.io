@@ -1,0 +1,9 @@
+[project]
+name = "crow-site"
+version = "0.1.0"
+description = "Build tooling for crow-ai.dev (mkdocs-material + skill sync)"
+requires-python = ">=3.12"
+dependencies = [
+    "mkdocs-material>=9.6",
+    "pyyaml>=6.0",
+]

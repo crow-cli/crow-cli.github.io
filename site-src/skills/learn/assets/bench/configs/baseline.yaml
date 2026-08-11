@@ -1,0 +1,28 @@
+# Baseline config for bench testing
+# Copy this file and mutate one dimension at a time.
+# Usage: crow-cli run --config-file baseline.yaml -s bench-001 "problem text"
+
+mcpServers:
+  crow-mcp:
+    transport: stdio
+    command: uvx
+    args:
+    - crow-mcp
+
+db_uri: sqlite:////home/thomas/.crow/crow.db
+
+providers:
+  alibaba:
+    base_url: https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1
+    api_key: ${ALIBABA_API_KEY}
+
+models:
+  qwen3.8-max-preview:
+    provider: alibaba
+    model: qwen3.8-max-preview
+
+# D3: Generation Control
+temperature: 0.2
+
+# D1: Context Assembly (uses default system_prompt.jinja2)
+# system_prompt_path: ~/.agents/crow/prompts/system_prompt.jinja2
