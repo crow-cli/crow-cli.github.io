@@ -25,18 +25,16 @@ Run the CLI straight from the source tree:
 uv --project ~/.agents/crow/src/crow-cli/crow-cli run crow-cli --help
 ```
 
-Most people wrap that. For example, in your shell rc:
-
-```bash
-alias crow="uv --project ~/.agents/crow/src/crow-cli/crow-cli run crow-cli"
-```
-
 ## Initialize config
 
 ```bash
-crow init          # interactive: writes ~/.agents/crow/config.yaml, .env, prompts/
-crow init --yes    # skip confirmations
+uv --project ~/.agents/crow/src/crow-cli/crow-cli run crow-cli init
 ```
+
+`init` is interactive and writes `~/.agents/crow/config.yaml`, `.env`, and the
+jinja2 system prompt template to `~/.agents/crow/prompts/`; `--yes` skips
+confirmations. Then fill in at least one provider and model — see
+[Configuration](configuration.md).
 
 `init` writes a `config.yaml` skeleton, a `.env` for secrets, and the jinja2
 system prompt template to `~/.agents/crow/prompts/`. Then fill in at least one
@@ -47,8 +45,8 @@ provider and model — see [Configuration](configuration.md).
 The agent wants its daemon layer up (memory, MCP, embeddings, search):
 
 ```bash
-crow daemon install ollama-mv   # builds the multivector embedding server, starts it
-crow daemon start all           # crow-memory, crow-mcp, ollama-mv, searxng, services:
+crow-cli daemon install ollama-mv   # build the multivector embedding server, start it
+crow-cli daemon start all           # crow-memory, crow-mcp, ollama-mv, searxng, services:
 ```
 
 See [Services](services.md) for what each one is.

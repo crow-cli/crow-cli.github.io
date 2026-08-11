@@ -46,7 +46,7 @@ mcpServers:
 # ------------------------------------------------------------- services --
 # services: how to run things (typically MCP servers) as daemons. Each entry
 # takes daemon fields; a service named like an mcpServers entry with no health
-# check gets its tcp probe port from that entry's url. `crow daemon start all`
+# check gets its tcp probe port from that entry's url. `crow-cli daemon start all`
 # brings the whole stack up. See services.md.
 services:
   playwright:
@@ -93,6 +93,6 @@ daemons:
   `acp -m` overrides per invocation.
 - **`${VAR}` expansion** applies to the whole file; unset variables expand to
   empty and produce a startup warning.
-- **`system_prompt_path`** is written by `crow init`. Delete the key to fall
+- **`system_prompt_path`** is written by `crow-cli init`. Delete the key to fall
   back to the built-in prompt; `-p/--system-prompt-path` on `acp` wins over both.
 - **`daemons:` always wins** — built-ins < `services:` < `daemons:`.

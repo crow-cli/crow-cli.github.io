@@ -16,12 +16,12 @@ Conventions: pidfile at `~/.agents/crow/run/<name>.pid`, log at
 ## The commands
 
 ```bash
-crow daemon status          # pid / running / healthy / unmanaged for all
-crow daemon start all       # no-op if already running
-crow daemon stop crow-mcp   # never kills processes we didn't start
-crow daemon restart all
-crow daemon install ollama-mv   # build what's missing, point config at it,
-                                # start, verify embeddings. Idempotent.
+crow-cli daemon list          # pid / running / healthy / unmanaged for all
+crow-cli daemon start all     # no-op if already running
+crow-cli daemon stop crow-mcp # never kills processes we didn't start
+crow-cli daemon restart all
+crow-cli daemon install ollama-mv   # build what's missing, point config at
+                                     # it, start, verify. Idempotent.
 ```
 
 **Unmanaged is sacred.** If a service is up but we don't hold its pidfile
@@ -50,7 +50,7 @@ services:
 
 A service that shares its name with an `mcpServers:` entry and declares no
 health check gets its tcp probe port from that entry's url — one source of
-truth for the port. Then `crow daemon start all` brings up the whole stack,
+truth for the port. Then `crow-cli daemon start all` brings up the whole stack,
 and agent sessions connect over HTTP instead of spawning stdio servers per
 session.
 

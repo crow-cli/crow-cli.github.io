@@ -51,14 +51,14 @@ shared LanceDB store, so any agent can read any other's thoughts:
 
 ```bash
 # 1. launch a worker (gets a coolname session id)
-crow run "refactor the parser into its own module"
+crow-cli run "refactor the parser into its own module"
 
 # 2. continue it
-crow run -s <session-id> "now add tests"
+crow-cli run -s <session-id> "now add tests"
 
 # 3. long pre-written prompts from file or stdin
-crow run -f delegation.md -s <session-id>
-cat delegation.md | crow run -
+crow-cli run -f delegation.md -s <session-id>
+cat delegation.md | crow-cli run -
 
 # 4. from another agent: query_session(session_id="<session-id>")
 ```
@@ -83,8 +83,8 @@ The infrastructure layer — `start|stop|restart|status|list|install`. See
 
 ## `install`
 
-`crow install desktop` — the Crow Desktop IDE (a VS Code fork with the ACP
-client built in). `crow install check` for available releases.
+`crow-cli install desktop` — the Crow Desktop IDE (a VS Code fork with the ACP
+client built in). `crow-cli install check` for available releases.
 
 ## `auth`
 
