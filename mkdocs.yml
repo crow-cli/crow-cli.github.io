@@ -59,6 +59,7 @@ nav:
       - Catalog: skills/index.md
       - acp-v2: skills/acp-v2/SKILL.md
       - learn: skills/learn/SKILL.md
+      - model-probe: skills/model-probe/SKILL.md
       - openai-streaming-tools: skills/openai-streaming-tools/SKILL.md
       - plan-todo: skills/plan-todo/SKILL.md
       - searxng: skills/searxng/SKILL.md
@@ -66,3 +67,4 @@ nav:
       - skill-creation: skills/skill-creation/SKILL.md
       - upstream-merge: skills/upstream-merge/SKILL.md
       - use-uv: skills/use-uv/SKILL.md
+      - video-frames: skills/video-frames/SKILL.md

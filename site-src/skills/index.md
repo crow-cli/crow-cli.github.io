@@ -8,6 +8,7 @@ you can read them here or fetch them raw:
 | --- | --- | --- |
 | [acp-v2](acp-v2/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/acp-v2/SKILL.md) | — |
 | [learn](learn/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/learn/SKILL.md) | [assets/bench/configs/baseline.yaml](https://crow-ai.dev/skills/learn/assets/bench/configs/baseline.yaml), [references/feedback-ground-truth.md](https://crow-ai.dev/skills/learn/references/feedback-ground-truth.md), [references/gepa-research.md](https://crow-ai.dev/skills/learn/references/gepa-research.md), [references/instance-schema.md](https://crow-ai.dev/skills/learn/references/instance-schema.md), [references/integration-brainstorm.md](https://crow-ai.dev/skills/learn/references/integration-brainstorm.md), [references/memoharness-analysis.md](https://crow-ai.dev/skills/learn/references/memoharness-analysis.md) |
+| [model-probe](model-probe/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/model-probe/SKILL.md) | [assets/probe-image.png](https://crow-ai.dev/skills/model-probe/assets/probe-image.png), [pyproject.toml](https://crow-ai.dev/skills/model-probe/pyproject.toml), [scripts/probe_models.py](https://crow-ai.dev/skills/model-probe/scripts/probe_models.py) |
 | [openai-streaming-tools](openai-streaming-tools/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/openai-streaming-tools/SKILL.md) | — |
 | [plan-todo](plan-todo/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/plan-todo/SKILL.md) | — |
 | [searxng](searxng/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/searxng/SKILL.md) | — |
@@ -15,6 +16,7 @@ you can read them here or fetch them raw:
 | [skill-creation](skill-creation/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/skill-creation/SKILL.md) | — |
 | [upstream-merge](upstream-merge/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/upstream-merge/SKILL.md) | [references/protected-files.md](https://crow-ai.dev/skills/upstream-merge/references/protected-files.md) |
 | [use-uv](use-uv/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/use-uv/SKILL.md) | [pyproject.toml](https://crow-ai.dev/skills/use-uv/pyproject.toml) |
+| [video-frames](video-frames/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/video-frames/SKILL.md) | — |
 
 ## acp-v2
 
@@ -23,6 +25,10 @@ Build against Agent Client Protocol v2 (the in-draft successor to the v1 JSON-RP
 ## learn
 
 Optimize agent harness configs via bench testing. Use when the user asks to "improve the prompt", "run a bench", "optimize the harness", "A/B test configs", or "learn from failures." Builds test instances from crow.db, runs variants, judges outputs, and hill-climbs toward better configs.
+
+## model-probe
+
+Probe provider models with a real image to find out which are truly vision-capable, print the raw evidence, and (after YOU judge the results) write per-model modality lists into ~/.agents/crow/config.yaml. Use when the user says 'probe the models', 'which models have vision', 'fill out model capabilities', 'mark the text-only models', 'update modalities', 'vision capable', or after adding new models to config.yaml. Crow assumes [text, image] by default ('let it fail'); this skill produces the evidence and you fill in the optional values.
 
 ## openai-streaming-tools
 
@@ -51,3 +57,7 @@ Tactically merge upstream zed-industries/zed changes into the crow fork without 
 ## use-uv
 
 A ready-to-run Python sandbox that lives inside this skill. Use it whenever you need to EXECUTE Python — the terminal harness REJECTS raw python3/python ("Use 'uv' instead of python"), but `uv --project ~/.agents/skills/use-uv run python ...` is always allowed. Comes with pyyaml, httpx, and rich pre-installed; add more with `uv --project ~/.agents/skills/use-uv add <pkg>`. Reach for this to parse YAML/JSON, hit an HTTP API, pretty-print with rich, or run any throwaway script without setting up a venv. Trigger keywords — run python, execute script, uv, virtual environment, venv, pyyaml, httpx, parse yaml, harness rejected python.
+
+## video-frames
+
+Turn video (Playwright browser recordings, screen/webcam captures, any video file) into frames, and crop regions of interest out of frames for vision analysis. Use when the user asks to 'record the browser', 'take a video of the page', 'split the video into frames', 'extract frames', 'crop the screenshot', 'zoom into that area', 'check what the UI did', debug a UI flow over time, or analyze anything that moves. Frames are the universal path — Claude (sonnet/opus 5) and GPT-5.x have NO native video input (Anthropic's own recipe is break video into frames and do vision on them), and crow's image pipeline (read_image_file) already ships them to any vision model.
