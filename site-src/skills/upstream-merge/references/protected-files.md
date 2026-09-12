@@ -26,6 +26,15 @@ Repo-relative to the zed fork root.
   - crates/collab_ui/src/collab_panel.rs
   - crates/settings_content/src/settings_content.rs
   - crates/acp_thread/src/acp_thread.rs   # read_text_file/write_text_file: out-of-worktree Fs fallback (crow)
+  - crates/paths/src/paths.rs             # .crow_server / .crow_wsl_server remote dirs (upstream: .zed_server)
+  - crates/remote/src/transport.rs        # CROW_* env vars w/ ZED_* fallback; gnu-not-musl default; build-from-source
+  - crates/remote/src/transport/ssh.rs    # crow-remote-server-* binary name; dev bail message
+  - crates/remote/src/transport/docker.rs # crow-remote-server-* binary name; dev bail message
+  - crates/remote/src/transport/wsl.rs    # crow-remote-server-* binary name
+  - crates/remote_server/src/server.rs    # crow-remote-server crash-handler/cleanup names
+  - crates/auto_update/src/auto_update.rs # "crow-remote-server" release asset name
+  - crates/zed/Cargo.toml                 # remote = { features = ["build-remote-server-binary"] } (release builds!)
+  - crates/extension_host/src/extension_host.rs  # init(): extension store -> api.zed.dev (CROW_EXTENSION_API_URL override)
 
 ## Category C — cosmetic rebrand (high-frequency conflict; see whitelist below)
 String "Zed" -> "Crow" in USER-FACING display text. Hot spots:

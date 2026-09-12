@@ -7,13 +7,18 @@ you can read them here or fetch them raw:
 | skill | raw | files |
 | --- | --- | --- |
 | [acp-v2](acp-v2/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/acp-v2/SKILL.md) | — |
+| [create-subtool](create-subtool/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/create-subtool/SKILL.md) | — |
+| [crow-cli](crow-cli/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/crow-cli/SKILL.md) | — |
+| [hf-cli](hf-cli/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/hf-cli/SKILL.md) | [.hf-skill-manifest.json](https://crow-ai.dev/skills/hf-cli/.hf-skill-manifest.json) |
 | [learn](learn/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/learn/SKILL.md) | [assets/bench/configs/baseline.yaml](https://crow-ai.dev/skills/learn/assets/bench/configs/baseline.yaml), [references/feedback-ground-truth.md](https://crow-ai.dev/skills/learn/references/feedback-ground-truth.md), [references/gepa-research.md](https://crow-ai.dev/skills/learn/references/gepa-research.md), [references/instance-schema.md](https://crow-ai.dev/skills/learn/references/instance-schema.md), [references/integration-brainstorm.md](https://crow-ai.dev/skills/learn/references/integration-brainstorm.md), [references/memoharness-analysis.md](https://crow-ai.dev/skills/learn/references/memoharness-analysis.md) |
 | [model-probe](model-probe/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/model-probe/SKILL.md) | [assets/probe-image.png](https://crow-ai.dev/skills/model-probe/assets/probe-image.png), [pyproject.toml](https://crow-ai.dev/skills/model-probe/pyproject.toml), [scripts/probe_models.py](https://crow-ai.dev/skills/model-probe/scripts/probe_models.py) |
 | [openai-streaming-tools](openai-streaming-tools/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/openai-streaming-tools/SKILL.md) | — |
 | [plan-todo](plan-todo/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/plan-todo/SKILL.md) | — |
+| [playwright-cli](playwright-cli/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/playwright-cli/SKILL.md) | [references/element-attributes.md](https://crow-ai.dev/skills/playwright-cli/references/element-attributes.md), [references/playwright-tests.md](https://crow-ai.dev/skills/playwright-cli/references/playwright-tests.md), [references/request-mocking.md](https://crow-ai.dev/skills/playwright-cli/references/request-mocking.md), [references/running-code.md](https://crow-ai.dev/skills/playwright-cli/references/running-code.md), [references/session-management.md](https://crow-ai.dev/skills/playwright-cli/references/session-management.md), [references/storage-state.md](https://crow-ai.dev/skills/playwright-cli/references/storage-state.md), [references/test-generation.md](https://crow-ai.dev/skills/playwright-cli/references/test-generation.md), [references/tracing.md](https://crow-ai.dev/skills/playwright-cli/references/tracing.md), [references/video-recording.md](https://crow-ai.dev/skills/playwright-cli/references/video-recording.md) |
 | [searxng](searxng/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/searxng/SKILL.md) | — |
 | [sg](sg/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/sg/SKILL.md) | — |
 | [skill-creation](skill-creation/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/skill-creation/SKILL.md) | — |
+| [textual-to-ratatui](textual-to-ratatui/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/textual-to-ratatui/SKILL.md) | [references/gotchas.md](https://crow-ai.dev/skills/textual-to-ratatui/references/gotchas.md), [references/mapping.md](https://crow-ai.dev/skills/textual-to-ratatui/references/mapping.md) |
 | [upstream-merge](upstream-merge/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/upstream-merge/SKILL.md) | [references/protected-files.md](https://crow-ai.dev/skills/upstream-merge/references/protected-files.md) |
 | [use-uv](use-uv/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/use-uv/SKILL.md) | [pyproject.toml](https://crow-ai.dev/skills/use-uv/pyproject.toml) |
 | [video-frames](video-frames/SKILL.md) | [SKILL.md](https://crow-ai.dev/skills/video-frames/SKILL.md) | — |
@@ -21,6 +26,18 @@ you can read them here or fetch them raw:
 ## acp-v2
 
 Build against Agent Client Protocol v2 (the in-draft successor to the v1 JSON-RPC stdio protocol crow-cli currently speaks). Use when the task is "build an ACP v2 agent/client", "Rust ACP agent", "crow-cli v2", "persistent agent", "session/update stream", "state_update / move beyond the turn", orchestration / subagent verifier over ACP, or migrating the existing v1 crow-cli ACP code to v2. Covers what v2 changes vs v1, the exact repo/crate map (the non-obvious bit), the verified Rust wire types, the new prompt lifecycle that enables event-driven orchestration, and how to scaffold crow-cli v2 as a PERSISTENT Rust ACP AGENT (with MCP tools + native lancedb), plus the client/conductor side for orchestration. Source = the cloned spec repo ~/src/crow-team/agent-client-protocol and the cloned runtime ~/src/crow-team/rust-sdk (schema v2.0.0-alpha.2, draft 2026-07-20).
+
+## create-subtool
+
+Add or improve a crow-cli subtool (crow_cli.tools.*) — the agent's Python standard library inside the persistent execute kernel. Use when the task is "add a subtool", "write a new tool for crow", "improve a subtool's docstring/help", "the tools are missing X capability", "wire a tool into _LAZY", "why isn't my tool change live", or iterating on crow_cli.tools source with reload(). Covers the three-fold result split, the @subtool decorator, the lazy facade, and the edit-then-reload verification loop.
+
+## crow-cli
+
+The crow-cli map — where the source lives, how a running agent was spawned, and how to change, upgrade, or repair crow-cli itself. Use when the task touches crow-cli's own code or install ("fix crow-cli", "upgrade crow-cli", "reinstall", "where is the source", "the checkout", "crow-cli init", "project agent", "why is my change not live", "self-heal", "the TUI spawns"), when a crow-cli spawn failed, or when you are an agent asked to repair a broken crow-cli. Also the entry point for the feedback loop (analysis/ideas files, the learn skill).
+
+## hf-cli
+
+Hugging Face Hub CLI (`hf`) for downloading, uploading, and managing models, datasets, spaces, buckets, repos, papers, jobs, and more on the Hugging Face Hub. Use when: handling authentication; managing local cache; managing Hugging Face Buckets; running or scheduling jobs on Hugging Face infrastructure; managing Hugging Face repos; discussions and pull requests; browsing models, datasets and spaces; reading, searching, or browsing academic papers; managing collections; querying datasets; configuring spaces; setting up webhooks; or deploying and managing HF Inference Endpoints. Make sure to use this skill whenever the user mentions 'hf', 'huggingface', 'Hugging Face', 'huggingface-cli', or 'hugging face cli', or wants to do anything related to the Hugging Face ecosystem and to AI and ML in general. Also use for cloud storage needs like training checkpoints, data pipelines, or agent traces. Use even if the user doesn't explicitly ask for a CLI command. Replaces the deprecated `huggingface-cli`.
 
 ## learn
 
@@ -38,6 +55,10 @@ OpenAI Chat Completions streaming tool call accumulation — the wire format, th
 
 The plan-todo development loop — how to run a long multi-task sprint without stopping to ask. Use when the user drops a big pivot or brain-dump of work ("write this down", "here's everything"), when starting a sprint, when a session says "TODO.md / PLAN.md", or when you are a compacted/next agent picking up unfinished work. Write unordered TODO, write ordered PLAN with explicit test criteria, then work item by item — finish, verify, mark done, update both files, move on — until everything is complete. No feedback-seeking mid-sprint.
 
+## playwright-cli
+
+Automate browser interactions, test web pages and work with Playwright tests.
+
 ## searxng
 
 Recover the local searxng instance that backs the web_search tool. Use when web_search returns empty results, errors out, or you suspect the search backend is down ("search engine down", "web search not working", "searxng", "no results found" on a query that should have hits). Web search is NOT optional equipment — if it is broken, fix it before continuing, don't silently fall back to guessing. Diagnose, restart the container, retry.
@@ -49,6 +70,10 @@ Use ast-grep (sg) for AST-based structural code search, lint, and rewrite. Reach
 ## skill-creation
 
 Create new agent skills. Use when you notice a recurring task pattern that should be codified, or when the user asks to "make a skill" or "save this workflow." Skills are directories in ~/.agents/skills/ with a SKILL.md file.
+
+## textual-to-ratatui
+
+Convert Textual (Python) TUI widgets/screens — crow_cli.tui, toad — into fast Rust ratatui modules, feature by feature. Use when the task is "port this widget", "textual to ratatui", "convert crow_cli.tui to crow-term", "ratatui equivalent of a Textual widget", building a crow-term feature from the Python TUI branch, or when a Textual concept (reactive var, Message pump, BINDINGS, OptionList, TextArea, anchor) needs a ratatui design. Covers the paradigm shift (retained reactive → immediate mode), the state/render/input split that makes ports testable, and the verified ratatui 0.30 / pulldown-cmark API landmines.
 
 ## upstream-merge
 

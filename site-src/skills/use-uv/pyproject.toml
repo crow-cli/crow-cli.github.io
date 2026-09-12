@@ -11,6 +11,11 @@ dependencies = [
     "numpy>=2.4.6",
     "scipy>=1.17.1",
     "lancedb",
+    "websockets>=17.0.1",
+    "playwright>=1.62.0",
+    "docling>=2.87.0",
+    "cairosvg>=2.9.0",
+    "pillow>=12.3.0",
 ]
 
 [tool.uv]

@@ -58,13 +58,18 @@ nav:
   - Skills:
       - Catalog: skills/index.md
       - acp-v2: skills/acp-v2/SKILL.md
+      - create-subtool: skills/create-subtool/SKILL.md
+      - crow-cli: skills/crow-cli/SKILL.md
+      - hf-cli: skills/hf-cli/SKILL.md
       - learn: skills/learn/SKILL.md
       - model-probe: skills/model-probe/SKILL.md
       - openai-streaming-tools: skills/openai-streaming-tools/SKILL.md
       - plan-todo: skills/plan-todo/SKILL.md
+      - playwright-cli: skills/playwright-cli/SKILL.md
       - searxng: skills/searxng/SKILL.md
       - sg: skills/sg/SKILL.md
       - skill-creation: skills/skill-creation/SKILL.md
+      - textual-to-ratatui: skills/textual-to-ratatui/SKILL.md
       - upstream-merge: skills/upstream-merge/SKILL.md
       - use-uv: skills/use-uv/SKILL.md
       - video-frames: skills/video-frames/SKILL.md
