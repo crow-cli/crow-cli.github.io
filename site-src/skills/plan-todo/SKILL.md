@@ -5,8 +5,9 @@ description: The plan-todo development loop — how to run a long multi-task spr
   work ("write this down", "here's everything"), when starting a sprint, when a
   session says "TODO.md / PLAN.md", or when you are a compacted/next agent picking
   up unfinished work. Write unordered TODO, write ordered PLAN with explicit test
-  criteria, then work item by item — finish, verify, mark done, update both files,
-  move on — until everything is complete. No feedback-seeking mid-sprint.
+  criteria, arm the loop with `goal_start` so the session keeps working without
+  being asked, then work item by item — finish, verify, mark done, update both
+  files, move on — until everything is complete. No feedback-seeking mid-sprint.
 ---
 
 # The plan-todo loop
@@ -34,7 +35,19 @@ not in any agent's head — agents get compacted, files don't.
 
    Any future agent — compacted, delegated, or fresh — reads the files first and
    inherits the mandate without needing the conversation that produced it.
-5. **Work the PLAN, top uncompleted item first.** When you finish an item:
+5. **Arm the goal** — in an execute cell, once BOTH files exist:
+
+       await goal_start("complete every item in TODO.md and PLAN.md, each verified by its stated criteria")
+
+   That is the latch which makes step 6 self-driving: a turn that ends with the
+   goal `active` sends this session another turn with nobody asking, until you
+   call `goal_done` or `goal_blocked` (or a ceiling fires). Then TELL the user in
+   prose, in the same turn — the objective, that the session now keeps working
+   without them, and that `/goal pause` stops it while `/goal` shows where it is.
+   The row is not a notification; a loop the person does not know is running is a
+   loop they cannot stop. `goal_start` leaves an already-active goal alone and
+   refuses to lift a pause — the brake is the user's, not yours.
+6. **Work the PLAN, top uncompleted item first.** When you finish an item:
    - Verify it against its stated criteria (build, test, live eyeball — whatever
      the item says). No criteria were written? The repo's test suite is the floor.
    - Do NOT stop to seek feedback.
@@ -42,8 +55,10 @@ not in any agent's head — agents get compacted, files don't.
      date + what verified it).
    - Proceed to the next PLAN item.
    - Continue until everything in TODO and PLAN is complete.
-6. **Done means done.** Only when every item is checked (or explicitly deferred
-   with a reason written in TODO) do you report completion and ask what's next.
+7. **Done means done.** Only when every item is checked (or explicitly deferred
+   with a reason written in TODO) do you call `goal_done`, report completion and
+   ask what's next. `goal_done` is a claim you verified by looking — re-read the
+   files, re-run the gate — not a statement that the turn is over.
 
 ## Rules that keep the loop honest
 
@@ -62,6 +77,10 @@ not in any agent's head — agents get compacted, files don't.
   build passed, the tests passed, the command was eyeballed. Write what verified it.
 - **The user's rapid direction changes ARE the feedback.** When they interject,
   fold it into TODO/PLAN on the spot and keep moving — don't restart the loop.
+- **The goal is the loop; the files are the truth.** `goal_start` only keeps turns
+  coming — TODO.md/PLAN.md decide what the next one does. Never arm it before both
+  files exist: a continuation with no plan invents work, and inventing work to fill
+  a turn is worse than stopping.
 
 ## Picking up someone else's sprint (compacted/next agent)
 
@@ -71,3 +90,9 @@ not in any agent's head — agents get compacted, files don't.
    (they may never have compiled).
 3. Find the first unchecked PLAN item in the stated trajectory. Do it. Verify it.
    Mark it. Move on.
+4. Re-arm the goal if the row is not `active` — `/goal` shows it, or
+   `await memory("sql", "select status, objective, turns_used from goals where session_id='<this session id>'")`
+   (the id is in your system prompt's first line). A sprint nobody is continuing
+   stalls at the end of the turn, and the last agent's `goal_done`/`goal_blocked`
+   — or a pause you must NOT lift — is why. Over a stopped goal `goal_start` is a
+   restart: fresh id, zeroed counters, so say so when you tell the user.

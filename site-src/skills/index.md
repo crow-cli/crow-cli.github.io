@@ -53,7 +53,7 @@ OpenAI Chat Completions streaming tool call accumulation — the wire format, th
 
 ## plan-todo
 
-The plan-todo development loop — how to run a long multi-task sprint without stopping to ask. Use when the user drops a big pivot or brain-dump of work ("write this down", "here's everything"), when starting a sprint, when a session says "TODO.md / PLAN.md", or when you are a compacted/next agent picking up unfinished work. Write unordered TODO, write ordered PLAN with explicit test criteria, then work item by item — finish, verify, mark done, update both files, move on — until everything is complete. No feedback-seeking mid-sprint.
+The plan-todo development loop — how to run a long multi-task sprint without stopping to ask. Use when the user drops a big pivot or brain-dump of work ("write this down", "here's everything"), when starting a sprint, when a session says "TODO.md / PLAN.md", or when you are a compacted/next agent picking up unfinished work. Write unordered TODO, write ordered PLAN with explicit test criteria, arm the loop with `goal_start` so the session keeps working without being asked, then work item by item — finish, verify, mark done, update both files, move on — until everything is complete. No feedback-seeking mid-sprint.
 
 ## playwright-cli
 
