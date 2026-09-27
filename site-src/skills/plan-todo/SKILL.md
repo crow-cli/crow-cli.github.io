@@ -46,7 +46,8 @@ not in any agent's head — agents get compacted, files don't.
    without them, and that `/goal pause` stops it while `/goal` shows where it is.
    The row is not a notification; a loop the person does not know is running is a
    loop they cannot stop. `goal_start` leaves an already-active goal alone and
-   refuses to lift a pause — the brake is the user's, not yours.
+   refuses to lift a pause — the brake is the user's, not yours (`goal_reset` is
+   the way past a pause: it deletes the row instead of resuming it).
 6. **Work the PLAN, top uncompleted item first.** When you finish an item:
    - Verify it against its stated criteria (build, test, live eyeball — whatever
      the item says). No criteria were written? The repo's test suite is the floor.
@@ -94,5 +95,8 @@ not in any agent's head — agents get compacted, files don't.
    `await memory("sql", "select status, objective, turns_used from goals where session_id='<this session id>'")`
    (the id is in your system prompt's first line). A sprint nobody is continuing
    stalls at the end of the turn, and the last agent's `goal_done`/`goal_blocked`
-   — or a pause you must NOT lift — is why. Over a stopped goal `goal_start` is a
-   restart: fresh id, zeroed counters, so say so when you tell the user.
+   is why. Over a stopped goal `goal_start` is a restart: fresh id, zeroed
+   counters. A `paused` row is the one thing `goal_start` refuses — the brake is
+   the user's — and `await goal_reset()` is how out: it DELETES the row rather
+   than resuming the objective, so say plainly that you cleared the paused goal
+   and armed a new one.
